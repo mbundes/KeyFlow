@@ -16,9 +16,9 @@
 
 ## Screenshots
 
-| Main screen | App Rules |
-|---|---|
-| Toggle between media and function key mode | Add per-app rules with one tap |
+| Media Mode | Function Keys Mode | App Rules |
+|---|---|---|
+| ![Media mode](Screenshots/screenshot_main_media.png) | ![Fn mode](Screenshots/screenshot_main_fn.png) | ![App Rules](Screenshots/screenshot_rules.png) |
 
 ## Requirements
 
