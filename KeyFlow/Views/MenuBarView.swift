@@ -1,4 +1,5 @@
 import SwiftUI
+import ServiceManagement
 
 // MARK: - Shared color constant
 
@@ -47,6 +48,7 @@ struct MenuBarView: View {
     var rulesManager: RulesManager
 
     @State private var screen: MenuScreen = .main
+    @State private var launchAtLogin: Bool = (SMAppService.mainApp.status == .enabled)
 
     var body: some View {
         ZStack {
@@ -83,8 +85,8 @@ struct MenuBarView: View {
     }
 
     private var mainView: some View {
-        VStack(spacing: 16) {
-            Spacer().frame(height: 4)
+        VStack(spacing: 10) {
+            Spacer().frame(height: 2)
 
             // 1. Large centered icon — changes based on mode
             if fnKeyManager.currentMode == .media {
@@ -122,7 +124,7 @@ struct MenuBarView: View {
                 }
                 .font(.subheadline.weight(.medium))
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 6)
+                .padding(.vertical, 4)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
@@ -130,7 +132,29 @@ struct MenuBarView: View {
 
             Divider().padding(.horizontal, 16)
 
-            // 4. Exit button
+            // 4. Launch at Login toggle
+            Toggle(isOn: $launchAtLogin) {
+                Text("Launch at Login")
+                    .font(.subheadline.weight(.medium))
+            }
+            .toggleStyle(.switch)
+            .controlSize(.mini)
+            .padding(.horizontal, 20)
+            .onChange(of: launchAtLogin) { _, enabled in
+                do {
+                    if enabled {
+                        try SMAppService.mainApp.register()
+                    } else {
+                        try SMAppService.mainApp.unregister()
+                    }
+                } catch {
+                    launchAtLogin = (SMAppService.mainApp.status == .enabled)
+                }
+            }
+
+            Divider().padding(.horizontal, 16)
+
+            // 5. Exit button
             Button {
                 NSApplication.shared.terminate(nil)
             } label: {
@@ -141,13 +165,13 @@ struct MenuBarView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 6)
+                .padding(.vertical, 4)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .padding(.horizontal, 20)
 
-            Spacer().frame(height: 4)
+            Spacer().frame(height: 2)
         }
         .task {
             setupAppMonitoring()
