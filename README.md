@@ -18,7 +18,7 @@
 
 | Media Mode | Function Keys Mode | App Rules |
 |---|---|---|
-| ![Media mode](Screenshots/screenshot_main_media.png) | ![Fn mode](Screenshots/screenshot_main_fn.png) | ![App Rules](Screenshots/screenshot_rules.png) |
+| ![Media mode](Screenshots/screenshot_main_media.png?v=2) | ![Fn mode](Screenshots/screenshot_main_fn.png?v=2) | ![App Rules](Screenshots/screenshot_rules.png?v=2) |
 
 ## Requirements
 
