@@ -22,7 +22,7 @@
 
 ## Requirements
 
-- macOS 13 Ventura or later
+- macOS 14 Sonoma or later
 - Apple Silicon or Intel Mac
 
 > **Note:** KeyFlow uses IOKit to control the Fn key hardware register. This requires the App Sandbox to be **disabled**, so KeyFlow cannot be distributed via the Mac App Store. It is distributed as a signed and notarized app outside the App Store.
